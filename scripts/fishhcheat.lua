@@ -519,7 +519,7 @@ Toggles.NoVoiceCooldown:OnChanged(function()
 end)
 
 local GB_Removals = Tabs.Misc:AddLeftGroupbox('Removals')
-GB_Removals:AddToggle('NoFallDamage', {Text = 'No Fall Damage', Default = true, Tooltip = 'Block the remote for Fall Damage'})
+GB_Removals:AddToggle('NoFallDamage', {Text = 'No Fall Damage', Default = false, Tooltip = 'Block the remote for Fall Damage'})
 GB_Removals:AddToggle('NoSniperScope', {Text = 'No Rifle Scope', Default = false, Tooltip = "No scope when zooming in"})
 GB_Removals:AddToggle('NoSniperBeam', {Text = 'No Rifle Beam', Default = false, Tooltip = "Block the remote for the rifle's beam (serversided)"})
 GB_Removals:AddToggle('NoUndisguise', {Text = 'No Undisguising After Attack', Default = false, Tooltip = 'Block the remote for undisguising'})
