@@ -19,8 +19,8 @@ Fishhcheat is a free unobfuscated script for Typical Colors 2. Features include 
 Fishhcheat was coded on Swift, however there is a stripped-down version compatible with Solara.
 
 ## Risk of ban
-While this script is currently fully undetected by the anticheat, I can not guarantee it will remain this way forever.
-Most bans in TC2 nowadays are manual ones enforced by moderators, so if you get rage hack often you risk getting reported.
+The current status is questionable. Some features get you banned. Use with caution
+Some bans are manual ones enforced by moderators, so if you get rage hack often you risk getting reported.
 Only exploit on accounts you won't regret losing.
 
 [Join the TC2 Exploiting discord server!](https://discord.gg/eM3S4BsxY4)
