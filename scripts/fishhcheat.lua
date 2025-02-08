@@ -391,7 +391,11 @@ GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default
 GB_WeaponMods:AddSlider('FirerateAmount', {Text = 'Firerate', Default = 0.2, Min = 0.1, Max = 1, Rounding = 2, Compact = true})
 
 Toggles.AlwaysBackstab:OnChanged(function() -- Always Backstab
-    LocalPlayer.PlayerConfig:SetAttribute('PowerEffects_AlwaysBackstab', if Toggles.AlwaysBackstab.Value then true else nil)
+	if Toggles.AlwaysBackstab.Value then
+    		LocalPlayer.PlayerConfig:SetAttribute('PowerEffects_AlwaysBackstab', true)
+	else
+		LocalPlayer.PlayerConfig:SetAttribute('PowerEffects_AlwaysBackstab', nil)	
+	end
 end)
 
 
