@@ -1595,17 +1595,6 @@ RunService.RenderStepped:Connect(function()
 		ProjPosition = nil
 	end
 end)
-
---[[ swift exeshitter doesnt seem to support getsenv properly
-local returndamagemod = getsenv(LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).returndamagemod
-getsenv(LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).returndamagemod = function(...)
-	if Toggles.InfDamage.Value then
-		return math.huge
-	end
-	return returndamagemod(...)
-end
-]]
-
 	
 task.spawn(function() while task.wait(Options.ChatSpamDelay.Value) do
 	if Toggles.ChatSpamToggle.Value then -- Chat Spam
@@ -1686,11 +1675,11 @@ end))
 local index -- Firerate changer and Wallbang
 index = hookmetamethod(game, "__index", newcclosure(function(self, key)
     if not Library.Unloaded then
-		if key == "Value" and self:IsA("ValueBase") and not checkcaller() then
+		--[[if key == "Value" and self:IsA("ValueBase") and not checkcaller() then
 			if self.Name:lower():match("firerate") and Toggles.FirerateChanger.Value and not self.Parent:FindFirstChild("Projectile") then
 				return Options.FirerateAmount.Value
 			end
-		end
+		end]]
         if Toggles.Wallbang.Value and key == "Clips" then
             return workspace.Map
         end
