@@ -291,8 +291,7 @@ GB_Aimbot:AddDivider()
 GB_Aimbot:AddToggle('AimbotOnlyFOVVis', { Text = 'FOV Check', Default = false, Tooltip = 'Only aims at enemies within FOV'})
 GB_Aimbot:AddSlider('AimbotFOV', {Text = 'FOV', Default = 60, Min = 1, Max = 90, Rounding = 2, Compact = true})
 GB_Aimbot:AddToggle('AimbotShowFOV', { Text = 'Show FOV Circle', Default = false, Tooltip = 'Draw FOV Circle on screen'})
---GB_Aimbot:AddDivider() -- FINISH THIS!
---GB_Aimbot:AddToggle('AimbotLegitMelee', { Text = 'Legit Melee', Default = true, Tooltip = 'Enable distance check for melee'})
+GB_Aimbot:AddDivider() -- FINISH THISGB_Aimbot:AddToggle('AimbotLegitMelee', { Text = 'Legit Melee', Default = true, Tooltip = 'Enable distance check for melee'})
 GB_Aimbot:AddLabel('Fishhcheat is a free script available only on GitHub and v3rmillion. Do not use any other links!\nMade by FishhHvH', true)
 
 local GB_Hitbox = Tabs.Aim:AddRightGroupbox('Hitbox')
@@ -383,15 +382,14 @@ local GB_WeaponMods = Tabs.Mods:AddLeftGroupbox('Weapon Mods')
 GB_WeaponMods:AddToggle('AlwaysBackstab', { Text = 'Always Backstab', Default = false, Tooltip = 'Always backstab as Agent'})
 GB_WeaponMods:AddToggle('Wallbang', { Text = 'Wallbang', Default = false, Tooltip = 'Shoot through walls'})
 GB_WeaponMods:AddToggle('NoSpread', { Text = 'No Spread', Default = false, Tooltip = 'No spread for most weapons'})
---GB_WeaponMods:AddToggle('InfDamage', { Text = 'Infinite Damage', Default = false, Tooltip = 'All weapons insta-kill'})
+GB_WeaponMods:AddToggle('InfDamage', { Text = 'Infinite Damage', Default = false, Tooltip = 'All weapons insta-kill'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
---GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
+GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
 GB_WeaponMods:AddToggle('MaxBuildings', { Text = 'Instant LVL 3 Buildings', Default = false, Tooltip = "Mechanic buildings will instantly be lvl 3 once deployed"})
---[[GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons'})
+GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons'})
 GB_WeaponMods:AddSlider('FirerateAmount', {Text = 'Firerate', Default = 0.2, Min = 0.1, Max = 1, Rounding = 2, Compact = true})
 -- fakeaxis fight me irl
-]]
 
 Toggles.AlwaysBackstab:OnChanged(function() -- Always Backstab
 	if Toggles.AlwaysBackstab.Value then
@@ -440,7 +438,7 @@ LegacyLocalVariables.cloakleft:GetPropertyChangedSignal('Value'):Connect(functio
         LegacyLocalVariables.cloakleft.Value = 10
     end
 end)
---[[
+
 LegacyLocalVariables.chargeleft:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfCharge.Value then
 		if LegacyLocalVariables.Held2.Value then
@@ -456,7 +454,6 @@ LegacyLocalVariables.Held2:GetPropertyChangedSignal("Value"):Connect(function() 
 		LegacyLocalVariables.chargeleft.Value = 100
 	end
 end)
-]]
 
 local GB_Auto = Tabs.Automation:AddLeftGroupbox('Automation') 
 GB_Auto:AddToggle('AutoUber', { Text = 'Auto Uber', Default = false, Tooltip = 'Automatically uber when under health %'})
@@ -1481,7 +1478,7 @@ function PredictProjectile(Part, EquippedWeapon) -- Super basic prediction formu
 	
 	local ProjectileSpawnPosition = (Camera.CFrame * Projectiles[EquippedWeapon].CFrameOffset).Position
 	local TravelTime = ((ProjectileSpawnPosition - PlayerChar.Hitbox.Position).Magnitude / Projectiles[EquippedWeapon].Speed) + Ping / 1000
-	--local Gravity = (PlayerChar.Humanoid:GetState() == Enum.HumanoidStateType.Freefall) and Vector3.new(0, workspace.Gravity, 0) or Vector3.new(0, 0, 0)
+	local Gravity = (PlayerChar.Humanoid:GetState() == Enum.HumanoidStateType.Freefall) and Vector3.new(0, workspace.Gravity, 0) or Vector3.new(0, 0, 0)
 	-- fix!!! add grav prediction
 
 	local PredictedPos = PlayerChar.HumanoidRootPart.Position + PlayerChar.HumanoidRootPart.AssemblyLinearVelocity * TravelTime + Projectiles[EquippedWeapon].Offset
