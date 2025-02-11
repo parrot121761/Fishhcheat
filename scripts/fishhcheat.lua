@@ -1578,18 +1578,18 @@ RunService.RenderStepped:Connect(function()
 					Camera.CFrame = CFrame.lookAt(Camera.CFrame.Position, Target.CFrame.Position) -- ok finish this up mate.
 				end
 			end
-			if Toggles.AimbotAutoShoot.Value then
-				if Target then
-					LegacyLocalVariables.Held.Value = true
-					--require(LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet() -- doesn't seem to work. shoots but aimbot broken bru
-				else
-					LegacyLocalVariables.Held.Value = false
-				end
-			end
 		else
 			Target = nil
 			ProjPosition = nil
 		end		
+
+		if Toggles.AimbotAutoShoot.Value then
+			if Toggles.AimbotToggle.Value and Target then
+				LegacyLocalVariables.Held.Value = true	
+			else
+				LegacyLocalVariables.Held.Value = false
+			end
+		end
 	else
 		Target = nil
 		ProjPosition = nil
