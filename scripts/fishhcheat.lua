@@ -4,7 +4,7 @@
   / /_/ / ___/ __ \/ __ \/ ___/ __ \/ _ \/ __ `/ __/
  / __/ (__  ) / / / / / / /__/ / / /  __/ /_/ / /_
 /_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2
-7th February 2025
+12th February 2025
 imhozzy is a faggot
 
 ]]
@@ -15,6 +15,7 @@ print("Script executed")
 local Players = cloneref(game:GetService("Players"))
 local LocalPlayer = Players.LocalPlayer
 local RepStorage = cloneref(game:GetService("ReplicatedStorage"))
+local RepFirst = cloneref(game:GetService("ReplicatedFirst"))
 local RunService = cloneref(game:GetService('RunService'))
 local Camera = workspace.CurrentCamera
 local CoreGui = gethui() or cloneref(game:GetService('CoreGui'))
@@ -1616,6 +1617,8 @@ local BadRemotes = {
     "Starman"
 }
 
+local CreateProjectile = require(RepFirst.cByte).GetRemoteEvent("CreateProjectile")
+
 local namecall
 namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     local Method = getnamecallmethod()
@@ -1635,7 +1638,7 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     if Method == "FireServer" then
 		if self.Name == "UpdateSettings" then -- i hope this works
 			return
-		elseif self.Name == "CreateProjectile" and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
+		elseif self.Name == CreateProjectile.Name and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then -- too lazy to make it better
 			Arguments[select("#", ...)] = game
 			Arguments[2] = ProjPosition
 
