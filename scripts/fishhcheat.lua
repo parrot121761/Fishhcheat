@@ -404,7 +404,7 @@ end)
 
 
 local LegacyLocalVariables = LocalPlayer.PlayerGui.GUI.Client.LegacyLocalVariables
-
+--[[ Detected. I'll think of a way to bypass it
 LegacyLocalVariables.currentspread:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.NoSpread.Value then
         LegacyLocalVariables.currentspread.Value = 0
@@ -414,7 +414,7 @@ Toggles.NoSpread:OnChanged(function()
     if Toggles.NoSpread.Value then
         LegacyLocalVariables.currentspread.Value = 0
     end
-end)
+end)]]
 
 LegacyLocalVariables.ammocount:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfAmmo.Value and LocalPlayer.Character:GetAttribute("EquippedWeapon") ~= '' then
