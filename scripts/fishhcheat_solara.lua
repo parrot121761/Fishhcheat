@@ -389,7 +389,7 @@ end)
 
 local GB_WeaponMods = Tabs.Mods:AddLeftGroupbox('Weapon Mods')
 GB_WeaponMods:AddToggle('AlwaysBackstab', { Text = 'Always Backstab', Default = false, Tooltip = 'Always backstab as Agent'})
-GB_WeaponMods:AddToggle('NoSpread', { Text = 'No Spread', Default = false, Tooltip = 'No spread for most weapons'})
+--GB_WeaponMods:AddToggle('NoSpread', { Text = 'No Spread', Default = false, Tooltip = 'No spread for most weapons'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
 --GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
@@ -412,7 +412,7 @@ end)
 
 
 local LegacyLocalVariables = LocalPlayer.PlayerGui.GUI.Client.LegacyLocalVariables
-
+--[[ Detected. I'll think of a way to bypass it
 LegacyLocalVariables.currentspread:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.NoSpread.Value then
         LegacyLocalVariables.currentspread.Value = 0
@@ -423,6 +423,7 @@ Toggles.NoSpread:OnChanged(function()
         LegacyLocalVariables.currentspread.Value = 0
     end
 end)
+]]
 
 LegacyLocalVariables.ammocount:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfAmmo.Value and LocalPlayer.Character:GetAttribute("EquippedWeapon") ~= '' then
