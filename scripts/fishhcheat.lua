@@ -4,8 +4,7 @@
   / /_/ / ___/ __ \/ __ \/ ___/ __ \/ _ \/ __ `/ __/
  / __/ (__  ) / / / / / / /__/ / / /  __/ /_/ / /_
 /_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2
-12th February 2025
-imhozzy is a faggot
+15th February 2025
 
 ]]
 
@@ -1629,7 +1628,7 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
         if Target then
             if Arguments[3].IgnoreWater and Arguments[3].CollisionGroup == "Raycast" then
                 Arguments[1] = Camera.CFrame.Position
-                Arguments[2] = Target.CFrame.Position - Camera.CFrame.Position
+                Arguments[2] = (Target.CFrame.Position - Camera.CFrame.Position) + Vector3.new(math.random(-10, 10) / 10, math.random(-10, 10) / 10, math.random(-10, 10) / 10)
                 return namecall(self,unpack(Arguments))
             end
         end
