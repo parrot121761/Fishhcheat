@@ -284,7 +284,7 @@ local Tabs = {
 local GB_Aimbot = Tabs.Aim:AddLeftGroupbox('Aimbot')
 GB_Aimbot:AddToggle('AimbotToggle', { Text = 'Aimbot', Default = true, Tooltip = 'Aims at enemies'}):AddKeyPicker('AimbotBind', { Default = 'None', NoUI = false, Mode = 'Always', Text = 'Aimkey' })
 GB_Aimbot:AddToggle('ProjAimbotToggle', { Text = 'Projectile Aimbot (BETA)', Default = true, Tooltip = '*Attempts* to predict player movement for projectile weapons\nUse hitbox expander for grenade launchers.'})
-GB_Aimbot:AddToggle('SilentAimbot', { Text = 'Silent', Default = false, Tooltip = 'DO NOT ENABLE FOR NOW IT IS DETECTED'}) -- Aimbot flicks will not be visible, serverside or clientside.
+GB_Aimbot:AddToggle('SilentAimbot', { Text = 'Silent', Default = false, Tooltip = 'Aimbot flicks will not be visible, serverside or clientside.\nWARNING : Might be detected, use at your own risk'}) 
 GB_Aimbot:AddDropdown("TargetPart", {Values = {'Head', 'UpperTorso', 'HumanoidRootPart'}, Default = 1, Multi = false, Text = "Aimbot Part"})
 GB_Aimbot:AddToggle('AimbotAutoShoot', { Text = 'Autoshoot', Default = false, Tooltip = 'Automatically shoots when aimbot finds a target'})
 GB_Aimbot:AddDivider()
