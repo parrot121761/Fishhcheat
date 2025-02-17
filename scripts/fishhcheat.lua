@@ -48,8 +48,8 @@ FOVCircle.Color = Color3.new(255,255,255)
 FOVCircle.Thickness = 1
 FOVCircle.Filled = false
 
-RepStorage.VIPSettings.NoTeamLimits.Value = true
-RepStorage.VIPSettings.EnabledSpectator.Value = true
+--RepStorage.VIPSettings.NoTeamLimits.Value = true
+--RepStorage.VIPSettings.EnabledSpectator.Value = true
 RepStorage.VIPSettings.NoVoiceCooldown.Value = true
 
 if not Lighting:FindFirstChild('ColorCorrection') then
