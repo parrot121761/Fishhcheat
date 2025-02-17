@@ -1524,7 +1524,7 @@ local GetClosestToMouse = function(TargetPart)
 
                     				local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
 
-                    				if not Raycast or Toggles.Wallbang.Value then -- I would check for instance, but it doesn't seem to work...]]
+                    				if not Raycast then -- I would check for instance, but it doesn't seem to work...]]
                         				Closest = Magnitude
                         				ToRet = Selected
                     				end
@@ -1552,7 +1552,7 @@ local GetClosestToMouse = function(TargetPart)
 
                 			local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
 
-                			if not Raycast or Toggles.Wallbang.Value then
+                			if not Raycast then
                    				Closest = Magnitude
                     				ToRet = Selected
                 			end
