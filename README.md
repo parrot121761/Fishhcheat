@@ -16,7 +16,10 @@ Fishhcheat is a free unobfuscated script for Typical Colors 2. Features include 
 ![Fishhcheat ingame screenshot](https://raw.githubusercontent.com/parrot121761/Fishhcheat/main/images/screenshot.png)
 
 ## Executor
-Fishhcheat was coded on Swift, however there is a stripped-down version compatible with Solara.
+Fishhcheat was coded on Swift, which is unfortunately currently still unavailable.\n
+Any paid executor that properly supports hookmetamethod should work fine. Mobile executors work too.\n
+There is a downgraded version available for Solara.\n
+Executors that it don't seem to work on properly : Luna, Cryptic PC
 
 ## Risk of ban
 The current status is questionable. Some features get you banned. Use with caution
