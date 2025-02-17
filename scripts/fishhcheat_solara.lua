@@ -57,8 +57,8 @@ FOVCircle.Color = Color3.new(255,255,255)
 FOVCircle.Thickness = 1
 FOVCircle.Filled = false
 
-RepStorage.VIPSettings.NoTeamLimits.Value = true
-RepStorage.VIPSettings.EnabledSpectator.Value = true
+--RepStorage.VIPSettings.NoTeamLimits.Value = true
+--RepStorage.VIPSettings.EnabledSpectator.Value = true
 RepStorage.VIPSettings.NoVoiceCooldown.Value = true
 
 if not Lighting:FindFirstChild('ColorCorrection') then
@@ -293,6 +293,7 @@ local Tabs = {
 local GB_Aimbot = Tabs.Aim:AddLeftGroupbox('Aimbot')
 GB_Aimbot:AddToggle('AimbotToggle', { Text = 'Aimbot', Default = true, Tooltip = 'Aims at enemies'}):AddKeyPicker('AimbotBind', { Default = 'LeftShift', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
 GB_Aimbot:AddToggle('ProjAimbotToggle', { Text = 'Projectile Aimbot (BETA)', Default = true, Tooltip = '*Attempts* to predict player movement for projectile weapons\nUse hitbox expander for grenade launchers.'})
+GB_Aimbot:AddToggle('Wallcheck', { Text = 'Wallcheck', Default = false, Tooltip = 'Raycasts dont work properly on Solara, toggled off by default.'})
 GB_Aimbot:AddDropdown("TargetPart", {Values = {'Head', 'UpperTorso', 'HumanoidRootPart'}, Default = 3, Multi = false, Text = "Aimbot Part"})
 GB_Aimbot:AddToggle('AimbotAutoShoot', { Text = 'Autoshoot', Default = false, Tooltip = 'Automatically shoots when aimbot finds a target'})
 GB_Aimbot:AddDivider()
@@ -1506,29 +1507,31 @@ local GetClosestToMouse = function(TargetPart)
 	
 	for i,v in next, Players:GetPlayers() do
 		if v.Character and v.Character:GetAttribute("isAlive") == true and v.Team ~= LocalPlayer.Team and not (Toggles.AimIgnoreInvis.Value and v.Character["UpperTorso"].Transparency > .9) and not (Toggles.AimIgnoreFriends.Value and LocalPlayer:IsFriendsWith(v.UserId) or MarkedPlayers[v.UserId] == "Ignored") then 
-			--if Toggles.AimIgnoreInvis.Value and v.Character["UpperTorso"].Transparency > .9 then continue end
-			--if Toggles.AimIgnoreFriends.Value and (LocalPlayer:IsFriendsWith(v.UserId) or MarkedPlayers[v.UserId] == "Ignored") then continue end
-			
 			local ToTarget = TargetPart or "Head"
 			local Selected = v.Character:FindFirstChild(ToTarget)
 			if Selected then
 				local SelectedToViewPort,IsVisible = Camera:WorldToViewportPoint(Selected.Position)
 				local Magnitude = (MouseLocation - Vector2.new(SelectedToViewPort.X,SelectedToViewPort.Y)).Magnitude -- we get distance from screen
-				--if Toggles.AimbotOnlyFOVVis.Value and Magnitude > Options.AimbotFOV.Value * 12.5 then continue end
+				
 				if not IsVisible and Toggles.AimbotOnlyFOVVis.Value then continue end
-				if Magnitude < Closest and not (Toggles.AimbotOnlyFOVVis.Value and (Magnitude > Options.AimbotFOV.Value * 12.5)) then                            
-					--[[local RaycastParams = RaycastParams.new()
-					RaycastParams.FilterDescendantsInstances = {v.Character, LocalPlayer.Character, Camera, workspace.Ray_Ignore, Map.Ignore, Map.Items, Map.TGCSpawns, Map.TRCSpawns, workspace.Accoutrements}
-					RaycastParams.FilterType = Enum.RaycastFilterType.Exclude
-                    local Origin = Camera.CFrame.Position
-                    local Direction = Selected.Position
+				if Magnitude < Closest and not (Toggles.AimbotOnlyFOVVis.Value and (Magnitude > Options.AimbotFOV.Value * 12.5)) then   
+					if Toggles.Wallcheck.Value then
+						local RaycastParams = RaycastParams.new()
+						RaycastParams.FilterDescendantsInstances = {v.Character, LocalPlayer.Character, Camera, workspace.Ray_Ignore, Map.Ignore, Map.Items, Map.TGCSpawns, Map.TRCSpawns, workspace.Accoutrements}
+						RaycastParams.FilterType = Enum.RaycastFilterType.Exclude
+                   				local Origin = Camera.CFrame.Position
+                    				local Direction = Selected.Position
 
-                    local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
+                    				local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
 
-                    if not Raycast or Toggles.Wallbang.Value then -- I would check for instance, but it doesn't seem to work...]]
-                        Closest = Magnitude
-                        ToRet = Selected
-                    --end
+                    				if not Raycast or Toggles.Wallbang.Value then -- I would check for instance, but it doesn't seem to work...]]
+                        				Closest = Magnitude
+                        				ToRet = Selected
+                    				end
+					else
+						Closest = Magnitude
+                        			ToRet = Selected		
+					end
 				end
 			end
 		end
@@ -1539,19 +1542,24 @@ local GetClosestToMouse = function(TargetPart)
 			local SelectedToViewPort,IsVisible = Camera:WorldToViewportPoint(Selected.Position)
 			local Magnitude = (MouseLocation - Vector2.new(SelectedToViewPort.X,SelectedToViewPort.Y)).Magnitude -- we get distance from screen
 			if not IsVisible and Toggles.AimbotOnlyFOVVis.Value then continue end
-			if Magnitude < Closest and not (Toggles.AimbotOnlyFOVVis.Value and (Magnitude > Options.AimbotFOV.Value * 12.5)) then                            
-				--[[local RaycastParams = RaycastParams.new()
-				RaycastParams.FilterDescendantsInstances = {v, LocalPlayer.Character, Camera, workspace.Ray_Ignore, Map.Ignore, Map.Items, Map.TGCSpawns, Map.TRCSpawns, workspace.Accoutrements}
-				RaycastParams.FilterType = Enum.RaycastFilterType.Exclude
-                local Origin = Camera.CFrame.Position
-                local Direction = Selected.Position
+			if Magnitude < Closest and not (Toggles.AimbotOnlyFOVVis.Value and (Magnitude > Options.AimbotFOV.Value * 12.5)) then        
+				if Toggles.Wallcheck.Value then
+					local RaycastParams = RaycastParams.new()
+					RaycastParams.FilterDescendantsInstances = {v, LocalPlayer.Character, Camera, workspace.Ray_Ignore, Map.Ignore, Map.Items, Map.TGCSpawns, Map.TRCSpawns, workspace.Accoutrements}
+					RaycastParams.FilterType = Enum.RaycastFilterType.Exclude
+                			local Origin = Camera.CFrame.Position
+                			local Direction = Selected.Position
 
-                local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
+                			local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
 
-                if not Raycast or Toggles.Wallbang.Value then]]
-                    Closest = Magnitude
-                    ToRet = Selected
-                --end
+                			if not Raycast or Toggles.Wallbang.Value then
+                   				Closest = Magnitude
+                    				ToRet = Selected
+                			end
+				else
+                   			Closest = Magnitude
+                    			ToRet = Selected
+				end
 			end
 		end	
 	end
@@ -1574,18 +1582,20 @@ function PredictProjectile(Part, EquippedWeapon) -- Super basic prediction formu
 	-- fix!!! add grav prediction
 
 	local PredictedPos = PlayerChar.HumanoidRootPart.Position + PlayerChar.HumanoidRootPart.AssemblyLinearVelocity * TravelTime + Projectiles[EquippedWeapon].Offset
-	--[[
+
+	if not Toggles.Wallcheck.Value then return PredictedPos end
+	
 	local RaycastParams = RaycastParams.new()
 	RaycastParams.FilterDescendantsInstances = {PlayerChar, LocalPlayer.Character, Camera, workspace.Ray_Ignore, workspace.Map.Ignore, workspace.Map.Items, workspace.Map.TGCSpawns, workspace.Map.TRCSpawns, workspace.Accoutrements}
 	RaycastParams.FilterType = Enum.RaycastFilterType.Exclude
 	local Origin = ProjectileSpawnPosition
-    local Direction = PredictedPos
-    local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
-	]]
+    	local Direction = PredictedPos
+    	local Raycast = workspace:Raycast(Origin, Direction - Origin, RaycastParams)
 	
-	--if not Raycast then
+	
+	if not Raycast then
 		return PredictedPos
-	--[[else
+	else
 		PredictedPos = PlayerChar.UpperTorso.Position + PlayerChar.HumanoidRootPart.AssemblyLinearVelocity * TravelTime
 		Origin = ProjectileSpawnPosition
 		Direction = PredictedPos
@@ -1597,7 +1607,7 @@ function PredictProjectile(Part, EquippedWeapon) -- Super basic prediction formu
 			return
 		end
 	end
-	]]
+	
 end
 
 local function Rotate(cframe) 
