@@ -1,6 +1,6 @@
 # Fishhcheat
 ![Fishhcheat logo](https://raw.githubusercontent.com/parrot121761/Fishhcheat/main/images/logo.png)
-Aim training software for TC2 ( ͡° ͜ʖ ͡°)
+Only ~95~ 90% pasted ( ͡° ͜ʖ ͡°)
 
 ```loadstring(game:HttpGet('https://raw.githubusercontent.com/parrot121761/Fishhcheat/refs/heads/main/loader.lua'))()```
 ## Press Right Shift to toggle menu
