@@ -11,9 +11,6 @@
 repeat task.wait() until game:IsLoaded()
 print("Script executed")
 
--- loading sigma anticheat bypass by asgerpasker
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
-
 local Players = cloneref(game:GetService("Players"))
 local LocalPlayer = Players.LocalPlayer
 local RepStorage = cloneref(game:GetService("ReplicatedStorage"))
@@ -1607,23 +1604,26 @@ task.spawn(function() while task.wait(Options.ChatSpamDelay.Value) do
 	end
 end)
 
-local BadRemotes = {
-    "BeanBoozled",
-    "WEGA",
-    "PlayVoice",
-    "PlayerChatted",
-    "ProjectileCrap",
-    "UpdateMetal",
-    "ToggleJuke",
-    "ModFunction",
-    "Starman"
-}
 
 -- fakeaxis can suck my dick
 local cByte = require(cloneref(game:GetService("ReplicatedFirst")).cByte)
 local CreateProjectile 
 if not pcall(function() CreateProjectile = cByte.GetRemoteEvent("CreateProjectile") end) then CreateProjectile = cByte.GetRemoteEvent("SpawnProjectile") end
 local ReplicateProjectile = cByte.GetRemoteEvent("ReplicateProjectile")
+
+local BadRemotes = {
+    	"BeanBoozled",
+    	"WEGA",
+    	"PlayVoice",
+    	"PlayerChatted",
+    	"ProjectileCrap",
+    	"UpdateMetal",
+    	"ToggleJuke",
+    	"ModFunction",
+    	"Starman",
+	cByte.GetRemoteEvent("BigBurger").Name,
+	cByte.GetRemoteEvent("BeanBurger").Name
+}
 
 local namecall
 namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
