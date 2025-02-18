@@ -1659,13 +1659,13 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     if Method == "FireServer" then
 		if self.Name == "UpdateSettings" then -- i hope this works
 			return
-		elseif self.Name == CreateProjectile.Name and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
+		elseif self.Name == CreateProjectile.Name or self.Name == "CreateProjectile" and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
 			Arguments[select("#", ...)] = game
 			Arguments[2] = ProjPosition
 
 			return namecall(self, unpack(Arguments))
 
-        elseif self.Name == ReplicateProjectile.Name and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
+        elseif self.Name == ReplicateProjectile.Name or self.Name == "ReplicateProjectile" and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
 			local Table = Arguments[1]
 			local WeaponArg = Table[1]
 
