@@ -4,17 +4,19 @@
   / /_/ / ___/ __ \/ __ \/ ___/ __ \/ _ \/ __ `/ __/
  / __/ (__  ) / / / / / / /__/ / / /  __/ /_/ / /_
 /_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2
-15th February 2025
+18th February 2025
 
 ]]
 
 repeat task.wait() until game:IsLoaded()
 print("Script executed")
 
+-- loading sigma anticheat bypass by asgerpasker
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
+
 local Players = cloneref(game:GetService("Players"))
 local LocalPlayer = Players.LocalPlayer
 local RepStorage = cloneref(game:GetService("ReplicatedStorage"))
-local RepFirst = cloneref(game:GetService("ReplicatedFirst"))
 local RunService = cloneref(game:GetService('RunService'))
 local Camera = workspace.CurrentCamera
 local CoreGui = gethui() or cloneref(game:GetService('CoreGui'))
@@ -293,6 +295,7 @@ GB_Aimbot:AddSlider('AimbotFOV', {Text = 'FOV', Default = 60, Min = 1, Max = 90,
 GB_Aimbot:AddToggle('AimbotShowFOV', { Text = 'Show FOV Circle', Default = false, Tooltip = 'Draw FOV Circle on screen'})
 --GB_Aimbot:AddDivider() -- FINISH THIS!
 --GB_Aimbot:AddToggle('AimbotLegitMelee', { Text = 'Legit Melee', Default = true, Tooltip = 'Enable distance check for melee'})
+GB_Aimbot:AddDivider()
 GB_Aimbot:AddLabel('Fishhcheat is a free script available only on GitHub and v3rmillion. Do not use any other links!\nMade by FishhHvH', true)
 
 local GB_Hitbox = Tabs.Aim:AddRightGroupbox('Hitbox')
@@ -382,7 +385,7 @@ end)
 local GB_WeaponMods = Tabs.Mods:AddLeftGroupbox('Weapon Mods')
 GB_WeaponMods:AddToggle('AlwaysBackstab', { Text = 'Always Backstab', Default = false, Tooltip = 'Always backstab as Agent'})
 GB_WeaponMods:AddToggle('Wallbang', { Text = 'Wallbang', Default = false, Tooltip = 'Shoot through walls'})
-GB_WeaponMods:AddToggle('NoSpread', { Text = 'No Spread', Default = false, Tooltip = 'No spread for most weapons'})
+GB_WeaponMods:AddToggle('NoSpread', { Text = 'Reduced Spread', Default = false, Tooltip = 'Significantly reduce spread for most weapons'})
 --GB_WeaponMods:AddToggle('InfDamage', { Text = 'Infinite Damage', Default = false, Tooltip = 'All weapons insta-kill'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
@@ -403,17 +406,17 @@ end)
 
 
 local LegacyLocalVariables = LocalPlayer.PlayerGui.GUI.Client.LegacyLocalVariables
---[[ Detected. I'll think of a way to bypass it
+
 LegacyLocalVariables.currentspread:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.NoSpread.Value then
-        LegacyLocalVariables.currentspread.Value = 0
+        LegacyLocalVariables.currentspread.Value = 3 -- i think you can do 2 but its risky
     end
 end)
 Toggles.NoSpread:OnChanged(function()
     if Toggles.NoSpread.Value then
-        LegacyLocalVariables.currentspread.Value = 0
+        LegacyLocalVariables.currentspread.Value = 3
     end
-end)]]
+end)
 
 LegacyLocalVariables.ammocount:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfAmmo.Value and LocalPlayer.Character:GetAttribute("EquippedWeapon") ~= '' then
@@ -526,7 +529,7 @@ GB_Removals:AddToggle('NoUndisguise', {Text = 'No Undisguising After Attack', De
 GB_Removals:AddToggle('NoSelfDamage', {Text = 'No Self Melee Damage', Default = false, Tooltip = 'No more self damage for certain melees'})
 GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn'})
 
-Toggles.NoSniperScope:OnChanged(function()
+Toggles.NoSniperScope:OnChanged(function() -- i need to fix this
 	if Toggles.NoSniperScope.Value then
 		for i,v in pairs(LocalPlayer.PlayerGui.HUDGui.Crosshairs.Scope:GetChildren()) do
 			if v.Name ~= 'ACTION_WEPFIRE' then
@@ -1616,7 +1619,11 @@ local BadRemotes = {
     "Starman"
 }
 
-local CreateProjectile = require(RepFirst.cByte).GetRemoteEvent("CreateProjectile")
+-- fakeaxis can suck my dick
+local cByte = require(cloneref(game:GetService("ReplicatedFirst")).cByte)
+local CreateProjectile 
+if not pcall(function() CreateProjectile = cByte.GetRemoteEvent("CreateProjectile") end) then CreateProjectile = cByte.GetRemoteEvent("SpawnProjectile") end
+local ReplicateProjectile = cByte.GetRemoteEvent("ReplicateProjectile")
 
 local namecall
 namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
@@ -1637,13 +1644,13 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     if Method == "FireServer" then
 		if self.Name == "UpdateSettings" then -- i hope this works
 			return
-		elseif self.Name == CreateProjectile.Name and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then -- too lazy to make it better
+		elseif self == CreateProjectile and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then -- too lazy to make it better
 			Arguments[select("#", ...)] = game
 			Arguments[2] = ProjPosition
 
 			return namecall(self, unpack(Arguments))
 
-        elseif self.Name == "ReplicateProjectile" and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
+        elseif self == ReplicateProjectile and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
 			local Table = Arguments[1]
 			local WeaponArg = Table[1]
 
@@ -1653,7 +1660,7 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
 
 			Arguments[1] = Table
 			return namecall(self, unpack(Arguments))
-        elseif self.Name == "FallDamage" and Toggles.NoFallDamage.Value then -- NoFallDamage
+        elseif self.Name == "FallDamage" and Toggles.NoFallDamage.Value then -- Need to fix this, they changed the remote names
             return
         elseif self.Name == "ReplicateDot" and Toggles.NoSniperBeam.Value then
             return
@@ -1674,7 +1681,7 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     return namecall(self, ...)
 end))
 
-local index -- Firerate changer and Wallbang
+local index -- Wallbang
 index = hookmetamethod(game, "__index", newcclosure(function(self, key)
     if not Library.Unloaded then
 		--[[if key == "Value" and self:IsA("ValueBase") and not checkcaller() then
