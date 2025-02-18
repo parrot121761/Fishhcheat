@@ -4,13 +4,15 @@
   / /_/ / ___/ __ \/ __ \/ ___/ __ \/ _ \/ __ `/ __/
  / __/ (__  ) / / / / / / /__/ / / /  __/ /_/ / /_
 /_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2 (Solara)
-7th February 2025
-imhozzy is a faggot
+18th February 2025
 
 ]]
 
 repeat task.wait() until game:IsLoaded()
 print("Script executed")
+
+-- loading sigma anticheat bypass by asgerpasker
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
 
 local Players = cloneref(game:GetService("Players"))
 local LocalPlayer = Players.LocalPlayer
@@ -390,7 +392,7 @@ end)
 
 local GB_WeaponMods = Tabs.Mods:AddLeftGroupbox('Weapon Mods')
 GB_WeaponMods:AddToggle('AlwaysBackstab', { Text = 'Always Backstab', Default = false, Tooltip = 'Always backstab as Agent'})
---GB_WeaponMods:AddToggle('NoSpread', { Text = 'No Spread', Default = false, Tooltip = 'No spread for most weapons'})
+GB_WeaponMods:AddToggle('NoSpread', { Text = 'Reduced Spread', Default = false, Tooltip = 'Significantly reduced spread for most weapons'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
 --GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
@@ -413,18 +415,18 @@ end)
 
 
 local LegacyLocalVariables = LocalPlayer.PlayerGui.GUI.Client.LegacyLocalVariables
---[[ Detected. I'll think of a way to bypass it
+
 LegacyLocalVariables.currentspread:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.NoSpread.Value then
-        LegacyLocalVariables.currentspread.Value = 0
+        LegacyLocalVariables.currentspread.Value = 3
     end
 end)
 Toggles.NoSpread:OnChanged(function()
     if Toggles.NoSpread.Value then
-        LegacyLocalVariables.currentspread.Value = 0
+        LegacyLocalVariables.currentspread.Value = 3
     end
 end)
-]]
+
 
 LegacyLocalVariables.ammocount:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfAmmo.Value and LocalPlayer.Character:GetAttribute("EquippedWeapon") ~= '' then
