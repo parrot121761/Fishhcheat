@@ -6,6 +6,8 @@
 /_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2
 18th February 2025
 
+Github is really retarded so the code looks weird with random spaces... idk why and i cant be bothered to fix it all.
+
 ]]
 
 repeat task.wait() until game:IsLoaded()
@@ -27,6 +29,13 @@ local Target
 local AimbotBind
 local ProjPosition
 local MouseLocation = UIS:GetMouseLocation()
+
+-- Phantom executor doesn't support lighting tech and ping getvalue.... wtf man
+local SupportsLightingTech
+if not pcall(function() SupportsLightingTech = Lighting.Technology end) then SupportsLightingTech = false end
+local SupportsGetValue
+if not pcall(function() SupportsGetValue = game:GetService('Stats').Network.ServerStatsItem['Data Ping']:GetValue() end) then SupportsGetValue = false end
+
 
 local ScopeStorage = Instance.new("Folder")
 ScopeStorage.Name = tostring(math.random(1000, 9999))
@@ -621,7 +630,11 @@ local Stats = game:GetService('Stats')
 
 local WatermarkConnection = RunService.RenderStepped:Connect(function()
 	FrameCounter = FrameCounter + 1; -- cuz of moonsec being retarded
-	Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
+	if SupportsGetValue then
+		Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
+	else
+		Ping = 0
+	end
 
 	if (tick() - FrameTimer) >= 1 then
 		FPS = FrameCounter;
@@ -1528,13 +1541,15 @@ RunService.RenderStepped:Connect(function()
 	end
 	
 	if not Lighting:FindFirstChild('ColorCorrection') then
-        Instance.new('ColorCorrectionEffect', Lighting)
-    end	
-    Lighting.ColorCorrection.TintColor = Options.ColorCorrection.Value
-    Lighting.ColorCorrection.Enabled = Toggles.ColorCorrectionToggle.Value
-	if Lighting.Technology ~= Enum.Technology[Options.LightingTechnology.Value] then
-        Lighting.Technology = Enum.Technology[Options.LightingTechnology.Value]
-    end
+        	Instance.new('ColorCorrectionEffect', Lighting)
+   	end	
+    	Lighting.ColorCorrection.TintColor = Options.ColorCorrection.Value
+    	Lighting.ColorCorrection.Enabled = Toggles.ColorCorrectionToggle.Value
+	if SupportsLightingTech then
+		if Lighting.Technology ~= Enum.Technology[Options.LightingTechnology.Value] then
+        		Lighting.Technology = Enum.Technology[Options.LightingTechnology.Value]
+    		end
+	end
 	if Toggles.NightMode.Value then
 		Lighting.ClockTime = 0
 	end
