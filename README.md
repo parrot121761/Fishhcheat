@@ -3,6 +3,7 @@
 Aim training software for TC2 ( ͡° ͜ʖ ͡°)
 
 ```loadstring(game:HttpGet('https://raw.githubusercontent.com/parrot121761/Fishhcheat/refs/heads/main/loader.lua'))()```
+## Press Right Shift to toggle menu
 
 ## Overview
 Fishhcheat is a free unobfuscated script for Typical Colors 2. Features include :
