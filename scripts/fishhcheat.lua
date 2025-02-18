@@ -1644,13 +1644,13 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     if Method == "FireServer" then
 		if self.Name == "UpdateSettings" then -- i hope this works
 			return
-		elseif self == CreateProjectile and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then -- too lazy to make it better
+		elseif self.Name == CreateProjectile.Name and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
 			Arguments[select("#", ...)] = game
 			Arguments[2] = ProjPosition
 
 			return namecall(self, unpack(Arguments))
 
-        elseif self == ReplicateProjectile and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
+        elseif self.Name == ReplicateProjectile.Name and Toggles.AimbotToggle.Value and Toggles.SilentAimbot.Value and AimbotBind and ProjPosition then
 			local Table = Arguments[1]
 			local WeaponArg = Table[1]
 
@@ -1660,7 +1660,7 @@ namecall = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
 
 			Arguments[1] = Table
 			return namecall(self, unpack(Arguments))
-        elseif self.Name == "FallDamage" and Toggles.NoFallDamage.Value then -- Need to fix this, they changed the remote names
+        elseif self.Name == "FallDamage" and Toggles.NoFallDamage.Value then 
             return
         elseif self.Name == "ReplicateDot" and Toggles.NoSniperBeam.Value then
             return
