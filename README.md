@@ -29,4 +29,4 @@ If you are constantly getting banned try forcing Solara version by typing the fo
 Some bans are manual ones enforced by moderators, so if you get rage hack often you risk getting reported.
 Only exploit on accounts you won't regret losing.
 
-[Join the TC2 Exploiting discord server!](https://discord.gg/eM3S4BsxY4)
+[Join the TC2 Exploiting discord server!](https://discord.gg/P4v2RFz2)
