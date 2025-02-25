@@ -30,12 +30,6 @@ local AimbotBind
 local ProjPosition
 local MouseLocation = UIS:GetMouseLocation()
 
--- Phantom executor doesn't support lighting tech and ping getvalue.... wtf man
-local SupportsLightingTech
-if not pcall(function() SupportsLightingTech = Lighting.Technology end) then SupportsLightingTech = false end
-local SupportsGetValue
-if not pcall(function() SupportsGetValue = game:GetService('Stats').Network.ServerStatsItem['Data Ping']:GetValue() end) then SupportsGetValue = false end
-
 
 local ScopeStorage = Instance.new("Folder")
 ScopeStorage.Name = tostring(math.random(1000, 9999))
@@ -630,11 +624,7 @@ local Stats = game:GetService('Stats')
 
 local WatermarkConnection = RunService.RenderStepped:Connect(function()
 	FrameCounter = FrameCounter + 1; -- cuz of moonsec being retarded
-	if SupportsGetValue then
-		Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
-	else
-		Ping = 0
-	end
+	Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
 
 	if (tick() - FrameTimer) >= 1 then
 		FPS = FrameCounter;
@@ -1545,11 +1535,9 @@ RunService.RenderStepped:Connect(function()
    	end	
     	Lighting.ColorCorrection.TintColor = Options.ColorCorrection.Value
     	Lighting.ColorCorrection.Enabled = Toggles.ColorCorrectionToggle.Value
-	if SupportsLightingTech then
-		if Lighting.Technology ~= Enum.Technology[Options.LightingTechnology.Value] then
-        		Lighting.Technology = Enum.Technology[Options.LightingTechnology.Value]
-    		end
-	end
+	if Lighting.Technology ~= Enum.Technology[Options.LightingTechnology.Value] then
+        	Lighting.Technology = Enum.Technology[Options.LightingTechnology.Value]
+    	end
 	if Toggles.NightMode.Value then
 		Lighting.ClockTime = 0
 	end
@@ -1635,8 +1623,8 @@ local BadRemotes = {
     	"ToggleJuke",
     	"ModFunction",
     	"Starman",
-	cByte.GetRemoteEvent("BigBurger").Name,
-	cByte.GetRemoteEvent("BeanBurger").Name
+	cByte.GetRemoteEvent("BigChungus").Name,
+	cByte.GetRemoteEvent("BiggerChungus").Name
 }
 
 local namecall
