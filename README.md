@@ -23,10 +23,9 @@ Fishhcheat is a free unobfuscated script for Typical Colors 2. Features include 
 * Executors that it don't seem to work on properly : Luna, Cryptic PC
 
 ## Risk of ban
-The current status is questionable. Some features get you banned. Use with caution
-If you are constantly getting banned try forcing Solara version by typing the following before the loadstring :
-```getgenv().Solara = true```
-Some bans are manual ones enforced by moderators, so if you get rage hack often you risk getting reported.
-Only exploit on accounts you won't regret losing.
+* I would suggest using asger's anticheat bypass available on the discord server cuz their anticheat is annoying af (they just rename ban remotes constantly)
+* Only exploit on accounts you don't care about losing
+* Moderators can and probably will manual ban you anyways if you keep ragehacking
+* TC2 has alt detection. you can find a way to bypass roblox alt detections on youtube
 
 [Join the TC2 Exploiting discord server!](https://discord.gg/fuCxBfZJNc)
