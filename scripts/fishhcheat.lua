@@ -14,7 +14,6 @@ Github is really retarded so the code looks weird with random spaces... idk why 
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
 
 repeat task.wait() until game:IsLoaded()
-print("Script executed")
 
 local Players = cloneref(game:GetService("Players"))
 local LocalPlayer = Players.LocalPlayer
@@ -235,7 +234,6 @@ local MarkedPlayers = {
 
 local function RemoveShit(shit)
 	if shit then
-		print("Destroying unnecessary shit... " .. shit.Name)
 		shit:Destroy()
 	end
 end
@@ -530,7 +528,7 @@ GB_Removals:AddToggle('NoSniperScope', {Text = 'No Rifle Scope', Default = false
 GB_Removals:AddToggle('NoSniperBeam', {Text = 'No Rifle Beam', Default = false, Tooltip = "Block the remote for the rifle's beam (serversided)"})
 GB_Removals:AddToggle('NoUndisguise', {Text = 'No Undisguising After Attack', Default = false, Tooltip = 'Block the remote for undisguising'})
 GB_Removals:AddToggle('NoSelfDamage', {Text = 'No Self Melee Damage', Default = false, Tooltip = 'No more self damage for certain melees'})
-GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn'})
+--GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn'}) Detected probably?
 
 Toggles.NoSniperScope:OnChanged(function() -- i need to fix this
 	if Toggles.NoSniperScope.Value then
@@ -562,9 +560,9 @@ LegacyLocalVariables.died:GetPropertyChangedSignal('Value'):Connect(function()
 		if Toggles.OneLife.Value then
 			game:GetService("TeleportService"):Teleport(16167003515, LocalPlayer) -- lmao
 		end
-		if Toggles.InstantRespawn.Value then -- Instant Respawn
-			RepStorage.Events.LoadCharacter:FireServer()
-		end
+		--if Toggles.InstantRespawn.Value then -- Instant Respawn
+		--	RepStorage.Events.LoadCharacter:FireServer()
+		--end
 		if Toggles.Deathsay.Value then -- Deathsay
 			RepStorage.Events.ChatMessage:FireServer(Deathsay[math.random(1, #Deathsay)], false)
 		end
@@ -646,8 +644,6 @@ Library.KeybindFrame.Visible = true;
 
 Library:OnUnload(function()
 	WatermarkConnection:Disconnect()
-
-	print('Unloaded!')
 	Library.Unloaded = true
 end)
 
@@ -1701,5 +1697,4 @@ index = hookmetamethod(game, "__index", newcclosure(function(self, key)
     return index(self, key)
 end))
 
-print("Successfully loaded!")
 Library:Notify("Welcome, " .. LocalPlayer.DisplayName)
