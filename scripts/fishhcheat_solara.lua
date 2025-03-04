@@ -4,12 +4,11 @@
   / /_/ / ___/ __ \/ __ \/ ___/ __ \/ _ \/ __ `/ __/
  / __/ (__  ) / / / / / / /__/ / / /  __/ /_/ / /_
 /_/ /_/____/_/ /_/_/ /_/\___/_/ /_/\___/\__,_/\__/	v2 (Solara)
-18th February 2025
+4th March 2025
 
 ]]
 
 repeat task.wait() until game:IsLoaded()
-print("Script executed")
 
 -- asger keeps breaking his anticheat bypass so enjoy possibly detected script? :steamhappy:
 --loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
@@ -241,7 +240,6 @@ local MarkedPlayers = {
 
 local function RemoveShit(shit)
 	if shit then
-		print("Destroying unnecessary shit... " .. shit.Name)
 		shit:Destroy()
 	end
 end
@@ -556,7 +554,7 @@ GB_Removals:AddToggle('NoSniperScope', {Text = 'No Rifle Scope', Default = false
 GB_Removals:AddToggle('NoSniperBeam', {Text = 'No Rifle Beam', Default = false, Tooltip = "Block the remote for the rifle's beam (serversided)"})
 GB_Removals:AddToggle('NoUndisguise', {Text = 'No Undisguising After Attack', Default = false, Tooltip = 'Block the remote for undisguising'})
 GB_Removals:AddToggle('NoSelfDamage', {Text = 'No Self Melee Damage', Default = false, Tooltip = 'No more self damage for certain melees'})
-GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn'})
+--GB_Removals:AddToggle('InstantRespawn', {Text = 'No Respawn Cooldown', Default = false, Tooltip = 'aka Instant Respawn'}) -- Detected probably?
 
 Toggles.NoSniperScope:OnChanged(function()
 	if Toggles.NoSniperScope.Value then
@@ -663,9 +661,9 @@ LegacyLocalVariables.died:GetPropertyChangedSignal('Value'):Connect(function()
 		if Toggles.OneLife.Value then
 			game:GetService("TeleportService"):Teleport(16167003515, LocalPlayer) -- lmao
 		end
-		if Toggles.InstantRespawn.Value then -- Instant Respawn
-			RepStorage.Events.LoadCharacter:FireServer()
-		end
+		--if Toggles.InstantRespawn.Value then -- Instant Respawn
+			--RepStorage.Events.LoadCharacter:FireServer()
+		--end
 		if Toggles.Deathsay.Value then -- Deathsay
 			RepStorage.Events.ChatMessage:FireServer(Deathsay[math.random(1, #Deathsay)], false)
 		end
@@ -746,8 +744,6 @@ Library.KeybindFrame.Visible = true;
 
 Library:OnUnload(function()
 	WatermarkConnection:Disconnect()
-
-	print('Unloaded!')
 	Library.Unloaded = true
 end)
 
@@ -1708,6 +1704,4 @@ task.spawn(function() while task.wait(Options.ChatSpamDelay.Value) do
 	end
 end)
 
-
-print("Successfully loaded!")
 Library:Notify("Welcome, " .. LocalPlayer.DisplayName)
